@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 30px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid #e1e1e1;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .email {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            margin-bottom: 20px;
+            color: #262626;
+        }
+
+        .edit-profile {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            cursor: pointer;
+        }
+
+        .stat-count {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        .posts-section {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .post {
+            aspect-ratio: 1;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        .add-post {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-picture">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Picture">
+        </div>
+
+     <!--     <div th:if="${user.firstname}" class="alert-message alert-error"></div>
+        
+         <div th:if="${user.email}" class="alert-message alert-error"></div> -->
+        
+        <div class="bio">
+            This is my bio. I love photography and sharing moments.
+        </div>
+
+        <button class="edit-profile">Edit Profile</button>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-count">1,234</div>
+                <div class="stat-label">Followers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-count">567</div>
+                <div class="stat-label">Following</div>
+            </div>
+        </div>
+
+        <div class="posts-section">
+            <h2>My Posts</h2>
+            <div class="posts-grid">
+                <div class="post"></div>
+                <div class="post"></div>
+                <div class="post"></div>
+                <div class="post"></div>
+                <div class="post"></div>
+                <div class="post"></div>
+            </div>
+        </div>
+
+        <button class="add-post">Add Post</button>
+    </div>
+
+    <script>
+        document.querySelector('.edit-profile').addEventListener('click', function() {
+            alert('Edit profile clicked!');
+        });
+
+        document.querySelector('.add-post').addEventListener('click', function() {
+            alert('Add post clicked!');
+        });
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const label = this.querySelector('.stat-label').textContent;
+                alert(`${label} clicked!`);
+            });
+        });
+    </script>
+</body>
+</html>
