@@ -1,7 +1,9 @@
 package org.jsp.jsp_gram.service;
 
 import java.util.Random;
-
+import java.util.List;
+import org.jsp.jsp_gram.repository.PostRepository;
+import org.jsp.jsp_gram.dto.Post;
 import org.jsp.jsp_gram.helper.CloudinaryHelper;
 import org.jsp.jsp_gram.dto.User;
 import org.jsp.jsp_gram.helper.AES;
@@ -20,6 +22,10 @@ public class UserService {
 
 	@Autowired
 	UserRepository repository;
+	
+	
+	@Autowired
+	PostRepository postRepository;
 
 	@Autowired
 	EmailSender emailSender;
@@ -130,15 +136,19 @@ public class UserService {
 
 	
 
-	public String profile(HttpSession session) {
+	public String profile(HttpSession session,ModelMap map) {
 		User user = (User) session.getAttribute("user");
 		if (user != null) {
-			return "profile.html";}
-		else {
+			List<Post> posts=postRepository.findByUser(user);
+			if(!posts.isEmpty())
+				map.put("posts",posts);
+			return "profile.html";
+		} else {
 			session.setAttribute("fail", "Invalid Session");
 			return "redirect:/login";
 		}
 	}
+	
 	
 	public String editProfile(HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -163,6 +173,30 @@ public class UserService {
 		}
 	}
 	
+	public String loadAddPost(ModelMap map, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			map.put("add", "add");
+			return "profile.html";
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
+	public String addPost(Post post, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			post.setImageUrl(cloudinaryHelper.saveImage(post.getImage()));
+			post.setUser(user);
+			postRepository.save(post);
+			
+			session.setAttribute("pass", "Posted Success");
+			return "redirect:/profile";
+			
+		}else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
 	
-
 }
