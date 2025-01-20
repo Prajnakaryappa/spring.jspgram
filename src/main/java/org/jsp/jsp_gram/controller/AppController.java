@@ -71,7 +71,7 @@ public class AppController {
 	
 	@GetMapping("/profile")
 	public String loadProfile(HttpSession session,ModelMap map) {
-		return service.profile(session,map);
+		return service.profile(session, map);
 	}
 	
 	
@@ -87,11 +87,24 @@ public class AppController {
 	
 	@GetMapping("/add-post")
 	public String loadAddPost(ModelMap map,HttpSession session) {
-		return service.loadAddPost(map,session);
+		return service.loadAddPost(map, session);
 	}
 	
 	@PostMapping("/add-post")
 	public String addPost(Post post,HttpSession session) {
 		return service.addPost(post,session);
+	}
+	@GetMapping("/delete/{id}")
+	public String deletePost(@PathVariable int id, HttpSession session) {
+		return service.deletePost(id, session);
+	}
+	@GetMapping("/suggestions")
+	public String suggestions(HttpSession session,ModelMap map) {
+		return service.viewSuggestions(session, map);
+	}
+	
+	@GetMapping("/follow/{id}")
+	public String follow(@PathVariable int id,HttpSession session) {
+		return service.followUser(id, session);
 	}
 }

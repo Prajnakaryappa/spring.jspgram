@@ -1,6 +1,12 @@
 package org.jsp.jsp_gram.dto;
 
+import java.util.List;
+import java.util.ArrayList;
+
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,6 +50,13 @@ public class User {
 	
 	private String bio;
 	private String imageUrl;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	List<User> followers = new ArrayList<User>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	List<User> following = new ArrayList<User>();
+
+
 	
 	public String getBio() {
 		return bio;
@@ -123,5 +136,18 @@ public class User {
 	public void setVerified(boolean verified) {
 		this.verified = verified;
 	}
-	
+	public List<User> getFollowers() {
+		return followers;
+	}
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
+	}
+	public List<User> getFollowing() {
+		return following;
+	}
+	public void setFollowing(List<User> following) {
+		this.following = following;
+	}
+	 
+	 
 }
